@@ -70,9 +70,12 @@ export default
       </div>
     </div>
     <button @click="pallet()">Do it</button> 
-    <div v-for="i in output">
-      <img :src="i">
-    </div>
+    <!-- this does not work. --> 
+    <!--
+      <div v-for="i in output">
+        <img :src="i">
+      </div>
+    -->
   </div>
 </template>
 

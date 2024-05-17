@@ -9,22 +9,29 @@ use itertools::Itertools;
 #[tauri::command]
 fn generate_svg_with_color_combinations(input_svg_file: String, color_pallete: Vec<String>) -> Option<Vec<String>> {
     let binding = input_svg_file.clone();
-    let output_folder = Path::new(&binding).parent().unwrap().as_os_str().to_str().unwrap();
+    let mut output_folder = Path::new(&binding)
+        .parent()
+        .unwrap()
+        .as_os_str()
+        .to_str()
+        .unwrap()
+        .to_owned();
+    output_folder.push_str("/output");//Change this to something more user freindly.
     
     let colors = get_svg_data(input_svg_file.clone()).unwrap();
     println!("{}", output_folder);
 
     if !path::Path::new(&output_folder).exists()
     {
-        if let Err(_) = fs::create_dir(output_folder) {
-            eprintln!("Failed to create folder '{}'", output_folder);
+        if let Err(_) = fs::create_dir(&output_folder) {
+            eprintln!("Failed to create folder '{}'", &output_folder);
             return None;
         }
     }
     let mut outputs = vec![];
     let mut index = 0;
     for color in color_pallete.iter().permutations(colors.len()).unique() {
-        let filename = format!("{}/out{}.svg", output_folder, index);
+        let filename = format!("{}/out{}.svg", &output_folder, index);
         let mut output = File::create(filename.clone()).unwrap();
         outputs.push(filename);
 
