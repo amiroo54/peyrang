@@ -105,21 +105,8 @@ fn get_svg_data(input_svg_file: String) -> Option<Vec<String>> {
     let reader = BufReader::new(file);
     
     let mut colors: Vec<String> = Vec::new();
-    let mut in_defs = false;
     for line in reader.lines() {
         if let Ok(line) = line {
-            if line.contains("<defs") {
-                // This is the start of the defs section
-                println!("this is def-enetily where drawing starts");
-                in_defs = true;
-                continue;
-            } 
-            if line.contains("</defs>") {
-                println!("this is def-enetily where drawing ends");
-                in_defs = false;
-                continue;
-            } 
-            if !in_defs {continue;}
             if let Some(index) = line.find("#") {
                 let color = line[index..index+7].to_string();
                 if !is_hex_color(&color) {
