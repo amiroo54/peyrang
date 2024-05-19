@@ -54,6 +54,9 @@ jobs:
       - name: install frontend dependencies
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
         run: npm install # change this to npm or pnpm depending on which one you use.
+      
+      # I dont know what im doing.
+      - name: install ubuntu frontend depsendencie
         if: matrix.settings.platfor == 'ubuntu-22.04'
         run: |
           npm install @tauri-apps/cli-linux-x64-gnu  
