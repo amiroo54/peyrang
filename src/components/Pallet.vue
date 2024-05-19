@@ -27,10 +27,18 @@ export default
         }
       });
     },
+    replace() {
+      console.log(this.inputPath);
+      invoke("replace_svg_color", { inputSvgFile: this.inputPath, colorPallete: this.colorPallet})
+      .then((res) => 
+      {
+        console.log(res);
+      })
+    },
     updateColor(event, color)
     {
       const index = this.colorPallet.indexOf(color);
-      this.colorPallet[index] = event.target.value;
+      this.colorPallet[index] = event;
       console.log(this.inputPath)
     },
     loadSVG : async function()
@@ -66,10 +74,11 @@ export default
     <button @click="colorPallet.push('#000000')">Add color</button>
     <div class="colors">
       <div v-for="color in colorPallet" :key="color">
-        <input type="color" :value="color" @input="updateColor($event, color)">
+        <color-picker format="hex" @update:pureColor="updateColor($event, color)" :pureColor="color"/>
       </div>
     </div>
-    <button @click="pallet()">Do it</button> 
+    <button @click="pallet()">Permutate</button>
+    <button @click="replace()">Replace</button> 
     <!-- this does not work. --> 
     <!--
       <div v-for="i in output">
