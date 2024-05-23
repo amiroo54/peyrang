@@ -37,7 +37,7 @@
     },
     "bundle": {
       "active": true,
-      "targets": "deb",
+      "targets": ["deb", "msi", "app", "dmg", "updater"],
       "identifier": "com.amiroof.svgpallet",
       "icon": [
         "icons/32x32.png",
