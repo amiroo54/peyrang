@@ -51,22 +51,19 @@ build() {
     echo -e "${WHITE}     Compiling Application     ${END}"
     echo -e "${PURPLE}|=============================|${END}"
     
-    NO_STRIP=true cargo tauri build
+    cargo tauri build
 }
 
 
 package() {
     cd "${pkgname}/src-tauri/target/release/bundle/deb/${pkgname}_${pkgver}_amd64/data"
-
-    for size in 128x128 256x256@2 512x512; do
-        install -Dm644 "usr/share/icons/hicolor/${size}/apps/${pkgname}.png" "${pkgdir}/usr/share/icons/hicolor/${size}/apps/${pkgname}.png"
+    for size in 128x128 256x256@2; do
+        sudo install -Dm644 "usr/share/icons/hicolor/${size}/apps/${pkgname}.png" "/usr/share/icons/hicolor/${size}/apps/${pkgname}.png"
     done
 
-    install -Dm644 "usr/share/desktop/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    sudo install -Dm644 "usr/share/applications/${pkgname}.desktop" "/usr/share/applications/${pkgname}.desktop"
 
-    install -Dm755 "usr/bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-
-    install -Dm755 "usr/share/scripts/update_system.sh" "${pkgdir}/usr/share/${pkgname}/scripts/update_system.sh"
+    sudo install -Dm755 "usr/bin/${pkgname}" "/usr/bin/${pkgname}"
 
     echo
     echo -e "${PURPLE}|=============================|${END}"
