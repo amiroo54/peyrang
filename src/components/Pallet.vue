@@ -35,6 +35,15 @@ export default
         console.log(res);
       })
     },
+    shift(type)
+    {
+      console.log(this.inputPath);
+      invoke("oklab_shift", { inputSvgFile: this.inputPath, shiftType: type, shiftColor: this.colorPallet[0]})
+      .then((res) => 
+      {
+        console.log(res);
+      })
+    },
     updateColor(event, color)
     {
       const index = this.colorPallet.indexOf(color);
@@ -79,6 +88,8 @@ export default
     </div>
     <button @click="pallet()">Permutate</button>
     <button @click="replace()">Replace</button> 
+    <button @click="shift(1)">Hue Shift (uses the first color)</button> 
+
     <!-- this does not work. --> 
     <!--
       <div v-for="i in output">
