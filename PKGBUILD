@@ -1,6 +1,6 @@
 # Maintainer: amiroof <amiroo.f54@gmail.com>
 pkgname=svg-pallet-changer
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
 pkgdesc="A simple application for replacing and permutating colors of an existing svg file."
 arch=('any')
