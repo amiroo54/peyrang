@@ -1,10 +1,10 @@
 # Maintainer: amiroof <amiroo.f54@gmail.com>
-pkgname=svg-pallet-changer
+pkgname=Peyrang
 pkgver=1.1.0
 pkgrel=1
 pkgdesc="A simple application for replacing and permutating colors of an existing svg file."
 arch=('any')
-url="https://github.com/amiroo54/svg-pallet-changer"
+url="https://github.com/amiroo54/peyrang"
 license=('MIT')
 depends=('cairo' 'desktop-file-utils' 'gdk-pixbuf2' 'glib2' 'gtk3' 'hicolor-icon-theme' 'pango' 'webkit2gtk')
 makedepends=(
@@ -20,9 +20,9 @@ makedepends=(
     "libappindicator-gtk3"
     "librsvg"
 )
-provides=("svg-pallet-changer")
-conflicts=("svg-pallet-changer")
-source=("$pkgname::git+https://github.com/amiroo54/svg-pallet-changer.git")
+provides=("peyrang")
+conflicts=("peyrang")
+source=("$pkgname::git+https://github.com/amiroo54/peyrang.git")
 sha256sums=('SKIP')
 
 build() {

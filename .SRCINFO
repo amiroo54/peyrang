@@ -1,8 +1,8 @@
-pkgbase = svg-pallet-changer
+pkgbase = Peyrang
 	pkgdesc = A simple application for replacing and permutating colors of an existing svg file.
-	pkgver = 1.0.0
+	pkgver = 1.1.0
 	pkgrel = 1
-	url = https://github.com/amiroo54/svg-pallet-changer
+	url = https://github.com/amiroo54/peyrang
 	arch = any
 	license = MIT
 	makedepends = npm
@@ -24,9 +24,9 @@ pkgbase = svg-pallet-changer
 	depends = hicolor-icon-theme
 	depends = pango
 	depends = webkit2gtk
-	provides = svg-pallet-changer
-	conflicts = svg-pallet-changer
-	source = svg-pallet-changer::git+https://github.com/amiroo54/svg-pallet-changer.git
+	provides = peyrang
+	conflicts = peyrang
+	source = Peyrang::git+https://github.com/amiroo54/peyrang.git
 	sha256sums = SKIP
 
-pkgname = svg-pallet-changer
+pkgname = Peyrang

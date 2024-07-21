@@ -1,4 +1,4 @@
-# svg-pallet-changer
+# Peyrang
 
 A desktop app built using Rust with Tauri and Vue.js that allows you to change the color palette of SVG images.
 
