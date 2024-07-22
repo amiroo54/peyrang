@@ -88,7 +88,11 @@ export default
     </div>
     <button @click="pallet()">Permutate</button>
     <button @click="replace()">Replace</button> 
-    <button @click="shift(1)">Hue Shift (uses the first color)</button> 
+    <div class="row">
+      <button @click="shift(0)">Set Chroma (uses the first color)</button> 
+      <button @click="shift(1)">Set Hue (uses the first color)</button> 
+      <button @click="shift(2)">Set Luminance (uses the first color)</button> 
+    </div>
 
     <!-- this does not work. --> 
     <!--
@@ -120,6 +124,13 @@ input[type="color"]
   display: flex;
   justify-content: center;
   flex-direction: column
+}
+
+.row
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .colors

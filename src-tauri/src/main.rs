@@ -118,32 +118,23 @@ fn oklab_shift(input_svg_file: String, shift_type: i8, shift_color: String) -> O
         let lab_shift: Lab = RGB::from_hex(&shift_color).unwrap().to_oklab(); 
         let mut result_color:String = String::default();
         match shift_type {
-            0 => {
-                lab.l += lab_shift.l;
-                lab.l %= 1.0;
-                
-                lab.a += lab_shift.a;
-                lab.a %= 1.0;
+            0 => { //set the chroma
+                let hue = lab.get_hue();
 
-                lab.b += lab_shift.b;
-                lab.b %= 1.0;
+                lab.set_values(hue, lab_shift.get_chroma());
 
                 result_color = lab.to_linear_srgb().to_hex();
             },
-            1 => {
-                println!("Lab result for {} is L: {}, a: {}, b: {}", color, lab.l, lab.a, lab.b);
+            1 => { //set the hue
                 let chroma = lab.get_chroma();
-                let mut hue = lab.get_hue();
-
-                hue += lab_shift.get_hue();
 
                 lab.set_values(lab_shift.get_hue(), chroma);
 
                 result_color = lab.to_linear_srgb().to_hex();
             },
-            2 => {
-                lab.b += lab_shift.b;
-                lab.b = lab.b.clamp(0.0, 1.0);
+            2 => { //set the luminance
+                lab.l = lab_shift.l;
+                
                 result_color = lab.to_linear_srgb().to_hex();
             },
             _ => println!("Wront input")
