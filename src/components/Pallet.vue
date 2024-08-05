@@ -1,6 +1,8 @@
 <script>
 import { invoke, convertFileSrc } from "@tauri-apps/api/tauri";
 import { open } from '@tauri-apps/api/dialog';
+import { WebviewWindow } from "@tauri-apps/api/window";
+import OKLabColorPicker from "./OKLabColorPicker.vue";
 export default
 {
   data() {
@@ -11,45 +13,17 @@ export default
       output: []
      }
   },
+  components:{OKLabColorPicker},
   methods: {
-    pallet() {
-      console.log(this.inputPath);
-      invoke("generate_svg_with_color_combinations", { inputSvgFile: this.inputPath, colorPallete: this.colorPallet})
-      .then((res) => 
-      {
-        console.log(res);
-        for (let out in res)
-        {
-          console.log(res[out]);
-          const asset = convertFileSrc(res[out]);
-          console.log(asset);
-          this.output.push(asset); 
-        }
-      });
-    },
-    replace() {
-      console.log(this.inputPath);
-      invoke("replace_svg_color", { inputSvgFile: this.inputPath, colorPallete: this.colorPallet})
-      .then((res) => 
-      {
-        console.log(res);
-      })
-    },
-    shift(type)
-    {
-      console.log(this.inputPath);
-      invoke("oklab_shift", { inputSvgFile: this.inputPath, shiftType: type, shiftColor: this.colorPallet[0]})
-      .then((res) => 
-      {
-        console.log(res);
-      })
-    },
+    
     updateColor(event, color)
     {
       const index = this.colorPallet.indexOf(color);
       this.colorPallet[index] = event;
-      console.log(this.inputPath)
+      this.active = index;
+      console.log(this.active)
     },
+
     loadSVG : async function()
     {
       this.inputPath = await open({
@@ -68,6 +42,15 @@ export default
 
       this.assetPath = await convertFileSrc(this.inputPath);
       console.log(this.assetPath);
+    },
+
+    newWindow(lable, path)
+    {
+      const window = new WebviewWindow(lable, {url: path});
+      console.log(window.url);
+      window.once('tauri://error', function (e) {
+        console.log(e);
+      })
     }
   }
 }
@@ -79,21 +62,15 @@ export default
       <button @click="loadSVG()">Load SVG</button>
       <img :src="assetPath" id="main">
     </div>
-    
+    <OKLabColorPicker width="100" height="100"/>
     <button @click="colorPallet.push('#000000')">Add color</button>
-    <div class="colors">
-      <div v-for="color in colorPallet" :key="color">
-        <color-picker format="hex" @update:pureColor="updateColor($event, color)" :pureColor="color"/>
-      </div>
-    </div>
-    <button @click="pallet()">Permutate</button>
-    <button @click="replace()">Replace</button> 
-    <div class="row">
-      <button @click="shift(0)">Set Chroma (uses the first color)</button> 
-      <button @click="shift(1)">Set Hue (uses the first color)</button> 
-      <button @click="shift(2)">Set Luminance (uses the first color)</button> 
-    </div>
+    
+    <button @click="newWindow('Permutate', '/pemutate')">Permutate</button>
+    <button @click="">Replace</button> 
+    <button @click="">Set Hue</button> 
+    
 
+    
     <!-- this does not work. --> 
     <!--
       <div v-for="i in output">

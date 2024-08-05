@@ -117,6 +117,7 @@ fn oklab_shift(input_svg_file: String, shift_type: i8, shift_color: String) -> O
         let mut lab: Lab =RGB::from_hex(color).unwrap().to_oklab();
         let lab_shift: Lab = RGB::from_hex(&shift_color).unwrap().to_oklab(); 
         let mut result_color:String = String::default();
+         
         match shift_type {
             0 => { //set the chroma
                 let hue = lab.get_hue();
