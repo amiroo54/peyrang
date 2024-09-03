@@ -54,8 +54,7 @@ export default
     {
       this.inputPath = await open({
         directory: false,
-        multiple: false,
-        filters: [{name: 'Images', extensions: ['svg']}]
+        multiple: false
       });
 
       
